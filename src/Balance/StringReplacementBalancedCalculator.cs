@@ -16,7 +16,7 @@ namespace Dgt.Balance
             return IsBalanced(input, regex);
         }
 
-        private bool IsBalanced(string input, Regex regex)
+        private static bool IsBalanced(string input, Regex regex)
         {
             while (true)
             {
