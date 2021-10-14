@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balance", "Balance\Balance.csproj", "{8BFE4595-AE7F-4059-ADAD-73034AC4F332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balance.Tests", "Balance.Tests\Balance.Tests.csproj", "{8A8AC55E-D2B6-499F-AC6F-74D1254BB43B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BFE4595-AE7F-4059-ADAD-73034AC4F332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFE4595-AE7F-4059-ADAD-73034AC4F332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFE4595-AE7F-4059-ADAD-73034AC4F332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFE4595-AE7F-4059-ADAD-73034AC4F332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8AC55E-D2B6-499F-AC6F-74D1254BB43B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8AC55E-D2B6-499F-AC6F-74D1254BB43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8AC55E-D2B6-499F-AC6F-74D1254BB43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8AC55E-D2B6-499F-AC6F-74D1254BB43B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
