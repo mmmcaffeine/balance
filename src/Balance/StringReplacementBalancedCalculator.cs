@@ -18,12 +18,15 @@ namespace Dgt.Balance
 
         private bool IsBalanced(string input, Regex regex)
         {
-            var value = regex.Replace(input, string.Empty);
+            while (true)
+            {
+                var value = regex.Replace(input, string.Empty);
 
-            if (value == string.Empty) return true;
-            if (value == input) return false;
+                if (value == string.Empty) return true;
+                if (value == input) return false;
 
-            return IsBalanced(value, regex);
+                input = value;
+            }
         }
     }
 }
