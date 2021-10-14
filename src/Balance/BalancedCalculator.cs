@@ -5,7 +5,7 @@ namespace Dgt.Balance
 {
     public static class BalancedCalculator
     {
-        public static bool IsBalanced(string input, IEnumerable<(char Start, char End)> delimiters)
+        public static bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
             var stack = new Stack<char>();

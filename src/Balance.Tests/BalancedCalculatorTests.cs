@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System.Drawing;
+using System.Net;
+using FluentAssertions;
 using Xunit;
 
 namespace Dgt.Balance
@@ -19,11 +21,11 @@ namespace Dgt.Balance
         public void Balance(string input, bool expectedIsBalanced)
         {
             // Arrange
-            (char Start, char End)[] delimiters =
+            var delimiters = new[]
             {
-                ('{', '}'),
-                ('[', ']'),
-                ('(', ')')
+                Delimiter.Braces,
+                Delimiter.Brackets,
+                Delimiter.Parentheses
             };
 
             // Act
