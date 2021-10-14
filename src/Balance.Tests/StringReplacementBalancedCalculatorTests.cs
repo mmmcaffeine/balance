@@ -5,18 +5,8 @@ namespace Dgt.Balance
 {
     public class StringReplacementBalancedCalculatorTests
     {
-        // TODO Use MemberData to share these test cases with other implementations
         [Theory]
-        [InlineData("[]", true)]
-        [InlineData("{}", true)]
-        [InlineData("()", true)]
-        [InlineData("([)]", false)]
-        [InlineData("([]", false)]
-        [InlineData("{{)(}}", false)]
-        [InlineData("({)}", false)]
-        [InlineData("[({})]", true)]
-        [InlineData("{}([])", true)]
-        [InlineData("{()}[[{}]]", true)]
+        [ClassData(typeof(IsBalancedTestData))]
         public void Balance(string input, bool expectedIsBalanced)
         {
             // Arrange
