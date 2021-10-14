@@ -8,8 +8,7 @@ namespace Dgt.Balance
     {
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
-            var strings = delimiters.Select(x => x.ToString());
-            var escapedStrings = strings.Select(Regex.Escape);
+            var escapedStrings = delimiters.Select(x => Regex.Escape(x.ToString()));
             var pattern = string.Join('|', escapedStrings);
             var regex = new Regex(pattern, RegexOptions.Compiled);
 
