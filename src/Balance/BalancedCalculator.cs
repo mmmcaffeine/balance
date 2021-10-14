@@ -21,14 +21,14 @@ namespace Dgt.Balance
                 }
                 else
                 {
-                    if (stack.Count == 0) return false;
+                    if (stack.Empty()) return false;
                     if (stack.Peek() != delimiter.Start) return false;
 
                     _ = stack.Pop();
                 }
             }
             
-            return stack.Count == 0;
+            return stack.Empty();
         }
     }
 }
