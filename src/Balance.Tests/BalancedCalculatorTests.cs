@@ -1,19 +1,36 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace Dgt.Balance
 {
     public class BalancedCalculatorTests
     {
-        [Fact]
-        public void IsBalanced_Should_ThrowNotImplementedException()
+        [Theory]
+        [InlineData("[]", true)]
+        [InlineData("{}", true)]
+        [InlineData("()", true)]
+        [InlineData("([)]", false)]
+        [InlineData("([]", false)]
+        [InlineData("{{)(}}", false)]
+        [InlineData("({)}", false)]
+        [InlineData("[({})]", true)]
+        [InlineData("{}([])", true)]
+        [InlineData("{()}[[{}]]", true)]
+        public void Balance(string input, bool expectedIsBalanced)
         {
             // Arrange
-            Action action = () => _ = BalancedCalculator.IsBalanced();
+            (char Start, char End)[] delimiters =
+            {
+                ('{', '}'),
+                ('[', ']'),
+                ('(', ')')
+            };
 
-            // Act, Assert
-            action.Should().Throw<NotImplementedException>();
+            // Act
+            var isBalanced = BalancedCalculator.IsBalanced(input, delimiters);
+            
+            // Assert
+            isBalanced.Should().Be(expectedIsBalanced);
         }
     }
 }

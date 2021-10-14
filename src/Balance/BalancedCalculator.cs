@@ -1,12 +1,34 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Dgt.Balance
 {
     public static class BalancedCalculator
     {
-        public static bool IsBalanced()
+        public static bool IsBalanced(string input, IEnumerable<(char Start, char End)> delimiters)
         {
-            throw new NotImplementedException();
+            var listOfDelimiters = delimiters.ToList();
+            var stack = new Stack<char>();
+
+            foreach (var character in input)
+            {
+                var delimiter = listOfDelimiters.FirstOrDefault(x => character == x.Start || character == x.End);
+                if (delimiter == default) continue;
+
+                if (character == delimiter.Start)
+                {
+                    stack.Push(character);
+                }
+                else
+                {
+                    if (stack.Count == 0) return false;
+                    if (stack.Peek() != delimiter.Start) return false;
+
+                    _ = stack.Pop();
+                }
+            }
+            
+            return stack.Count == 0;
         }
     }
 }
