@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Net;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace Dgt.Balance
