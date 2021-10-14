@@ -22,9 +22,7 @@ namespace Dgt.Balance
                 else
                 {
                     if (stack.Empty()) return false;
-                    if (stack.Peek() != delimiter.Start) return false;
-
-                    _ = stack.Pop();
+                    if (stack.Pop() != delimiter.Start) return false;
                 }
             }
             
