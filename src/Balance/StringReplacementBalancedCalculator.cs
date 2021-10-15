@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 namespace Dgt.Balance
 {
     // TODO Enhance this to cope with the open and close delimiter being the same character e.g. double quotes for a string
-    // TODO Enhance this to cope with text between delimiters (providing that text _doesn't_ match other delimiters)
     public class StringReplacementBalancedCalculator : IBalancedCalculator
     {
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
