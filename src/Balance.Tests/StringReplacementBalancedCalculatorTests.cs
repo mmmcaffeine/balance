@@ -8,7 +8,8 @@ namespace Dgt.Balance
     {
         [Theory]
         [ClassData(typeof(DelimitersOnlyTestData))]
-        public void Balance(string input, IEnumerable<Delimiter> delimiters, bool expectedIsBalanced)
+        public void IsBalanced_Should_ReturnTrueWhenDelimitersAreBalanced
+            (string input, IEnumerable<Delimiter> delimiters, bool expectedIsBalanced)
         {
             // Arrange
             var sut = new StringReplacementBalancedCalculator();
