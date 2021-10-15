@@ -9,6 +9,8 @@ namespace Dgt.Balance
         {
             Add("<elementName>", new[] { Delimiter.AngleBrackets }, true);
             Add("<elementName", new[] { Delimiter.AngleBrackets }, false);
+            Add("var x = Sum(new []{1, 2, 3});", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+            Add("var x = Sum(new [{1, 2, 3});", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, false);
         }
     }
 }

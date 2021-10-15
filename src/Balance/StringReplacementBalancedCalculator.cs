@@ -9,9 +9,11 @@ namespace Dgt.Balance
     {
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
-            var regex = CreateRegex(delimiters.ToList());
+            var listOfDelimiters = delimiters.ToList();
+            var regex = CreateRegex(listOfDelimiters);
+            var delimiterCharacters = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
 
-            return IsBalanced(input, regex);
+            return IsBalanced(input, delimiterCharacters, regex);
         }
 
         private static Regex CreateRegex(IReadOnlyCollection<Delimiter> delimiters)
@@ -49,14 +51,14 @@ namespace Dgt.Balance
             };
         }
 
-        private static bool IsBalanced(string input, Regex regex)
+        private static bool IsBalanced(string input, IEnumerable<char> delimiterCharacters, Regex regex)
         {
             while (true)
             {
                 var value = regex.Replace(input, string.Empty);
 
                 if (value == string.Empty) return true;
-                if (value == input) return false;
+                if (value == input) return !value.Intersect(delimiterCharacters).Any();
 
                 input = value;
             }
