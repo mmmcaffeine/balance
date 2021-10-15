@@ -3,13 +3,14 @@ using Xunit;
 
 namespace Dgt.Balance
 {
-    public class BalancedCalculatorTests
+    public class StackBasedBalancedCalculatorTests
     {
         [Theory]
         [ClassData(typeof(IsBalancedTestData))]
         public void Balance(string input, bool expectedIsBalanced)
         {
             // Arrange
+            var sut = new StackBasedBalancedCalculator();
             var delimiters = new[]
             {
                 Delimiter.Braces,
@@ -18,7 +19,7 @@ namespace Dgt.Balance
             };
 
             // Act
-            var isBalanced = BalancedCalculator.IsBalanced(input, delimiters);
+            var isBalanced = sut.IsBalanced(input, delimiters);
             
             // Assert
             isBalanced.Should().Be(expectedIsBalanced);

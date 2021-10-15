@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace Dgt.Balance
 {
-    public static class BalancedCalculator
+    public class StackBasedBalancedCalculator : IBalancedCalculator
     {
-        public static bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
+        public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
             var stack = new Stack<char>();
