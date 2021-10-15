@@ -56,9 +56,12 @@ namespace Dgt.Balance
             while (true)
             {
                 var value = regex.Replace(input, string.Empty);
+                var replacedSomething = value != input;
 
-                if (value == string.Empty) return true;
-                if (value == input) return !value.Intersect(delimiterCharacters).Any();
+                if (!replacedSomething)
+                {
+                    return !value.ContainsAny(delimiterCharacters);
+                }
 
                 input = value;
             }
