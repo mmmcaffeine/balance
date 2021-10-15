@@ -3,27 +3,20 @@ using Xunit;
 
 namespace Dgt.Balance
 {
-    public class DelimitersOnlyTestData : TheoryData<string, bool>
+    public class DelimitersOnlyTestData : TheoryData<string, IEnumerable<Delimiter>, bool>
     {
-        public static IEnumerable<Delimiter> Delimiters { get; } = new[]
-        {
-            Delimiter.Braces,
-            Delimiter.Brackets,
-            Delimiter.Parentheses
-        };
-
         public DelimitersOnlyTestData()
         {
-            Add("[]", true);
-            Add("{}", true);
-            Add("()", true);
-            Add("([)]", false);
-            Add("([]", false);
-            Add("{{)(}}", false);
-            Add("({)}", false);
-            Add("[({})]", true);
-            Add("{}([])", true);
-            Add("{()}[[{}]]", true);
+            Add("[]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+            Add("{}", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+            Add("()", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+            Add("([)]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, false);
+            Add("([]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, false);
+            Add("{{)(}}", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, false);
+            Add("({)}", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, false);
+            Add("[({})]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+            Add("{}([])", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+            Add("{()}[[{}]]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
         }
     }
 }
