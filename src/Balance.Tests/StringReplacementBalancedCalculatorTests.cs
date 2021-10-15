@@ -11,15 +11,9 @@ namespace Dgt.Balance
         {
             // Arrange
             var sut = new StringReplacementBalancedCalculator();
-            var delimiters = new[]
-            {
-                Delimiter.Braces,
-                Delimiter.Brackets,
-                Delimiter.Parentheses
-            };
 
             // Act
-            var isBalanced = sut.IsBalanced(input, delimiters);
+            var isBalanced = sut.IsBalanced(input, IsBalancedTestData.Delimiters);
         
             // Assert
             isBalanced.Should().Be(expectedIsBalanced);
