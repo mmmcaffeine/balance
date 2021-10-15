@@ -53,18 +53,17 @@ namespace Dgt.Balance
 
         private static bool IsBalanced(string input, IEnumerable<char> delimiterCharacters, Regex regex)
         {
-            while (true)
+            string previousValue;
+            var value = input;
+            
+            do
             {
-                var value = regex.Replace(input, string.Empty);
-                var replacedSomething = value != input;
+                previousValue = value;
+                value = regex.Replace(previousValue, string.Empty);
+                
+            } while (value != previousValue);
 
-                if (!replacedSomething)
-                {
-                    return !value.ContainsAny(delimiterCharacters);
-                }
-
-                input = value;
-            }
+            return !value.ContainsAny(delimiterCharacters);
         }
     }
 }
