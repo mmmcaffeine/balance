@@ -26,29 +26,15 @@ namespace Dgt.Balance
         private static string GetPattern(Delimiter expectedDelimiter, IEnumerable<Delimiter> unexpectedDelimiters)
         {
             var unexpectedCharacters = unexpectedDelimiters
-                .Select(x => $"{EscapeStart(x)}{EscapeEnd(x)}")
+                .Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}")
                 .ToList(); 
-            var escapedStart = EscapeStart(expectedDelimiter);
+            var escapedStart = expectedDelimiter.EscapeStart();
             var characterGroup = unexpectedCharacters.Any()
                 ? $"[^${string.Join(string.Empty, unexpectedCharacters)}]*"
                 : ".*";
-            var escapedEnd = EscapeEnd(expectedDelimiter);
+            var escapedEnd = expectedDelimiter.EscapeEnd();
 
             return $"{escapedStart}{characterGroup}{escapedEnd}";
-        }
-
-        private static string EscapeStart(Delimiter delimiter) => Regex.Escape(delimiter.Start.ToString());
-
-        // Helpfully, Regex.Escape does _not_ escape ']' or '}'
-        // See https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.escape?view=net-5.0
-        private static string EscapeEnd(Delimiter delimiter)
-        {
-            return delimiter.End switch
-            {
-                ']' => @"\]",
-                '}' => @"\}",
-                var x => Regex.Escape(x.ToString())
-            };
         }
 
         private static bool IsBalanced(string input, IEnumerable<char> delimiterCharacters, Regex regex)
