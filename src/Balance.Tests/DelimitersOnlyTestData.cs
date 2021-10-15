@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Dgt.Balance
 {
-    public class IsBalancedTestData : TheoryData<string, bool>
+    public class DelimitersOnlyTestData : TheoryData<string, bool>
     {
         public static IEnumerable<Delimiter> Delimiters { get; } = new[]
         {
@@ -12,7 +12,7 @@ namespace Dgt.Balance
             Delimiter.Parentheses
         };
 
-        public IsBalancedTestData()
+        public DelimitersOnlyTestData()
         {
             Add("[]", true);
             Add("{}", true);
