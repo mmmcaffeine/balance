@@ -11,8 +11,12 @@ namespace Dgt.Balance
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
-            var unescapedDelimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
-            var escapedDelimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.EscapeStart(), x.EscapeEnd() });
+            var unescapedDelimiterStrings = listOfDelimiters
+                .SelectMany(x => new[] { x.Start, x.End })
+                .Distinct();
+            var escapedDelimiterStrings = listOfDelimiters
+                .SelectMany(x => new[] { x.EscapeStart(), x.EscapeEnd() })
+                .Distinct();
             var regex = CreateRegex(listOfDelimiters, escapedDelimiterStrings.JoinUsing(AlternationCharacter));
 
             return IsBalanced(input, unescapedDelimiterStrings, regex);
