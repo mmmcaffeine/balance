@@ -15,13 +15,7 @@ namespace Dgt.Balance
                 var delimiter = listOfDelimiters.FirstOrDefault(x => character == x.Start || character == x.End);
                 if (delimiter == default) continue;
 
-                var startAndEndMatch = delimiter.Start == delimiter.End;
-                var startAlreadyPushed = stack.Any() && stack.Peek() == delimiter.Start;
-                var isStartOfMatchingPair = startAndEndMatch && !startAlreadyPushed;
-                var isStartOfOpposingPair = !startAndEndMatch && character == delimiter.Start;
-                var isStart = isStartOfMatchingPair || isStartOfOpposingPair;
-                
-                if (isStart)
+                if (IsStartCharacter(character, delimiter, stack))
                 {
                     stack.Push(character);
                 }
@@ -33,6 +27,25 @@ namespace Dgt.Balance
             }
             
             return stack.Empty();
+        }
+
+        private static bool IsStartCharacter(char character, Delimiter delimiter, Stack<char> stack)
+        {
+            var (start, end) = delimiter;
+            
+            if (character != start)
+            {
+                return false;
+            }
+
+            var isOpposingPair = start != end;
+
+            if (isOpposingPair)
+            {
+                return true;
+            }
+
+            return !(stack.Any() && stack.Peek() == character);
         }
     }
 }
