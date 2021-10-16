@@ -27,7 +27,7 @@ namespace Dgt.Balance
             var subPatterns = delimiters.Select(delimiter => GetPattern(delimiter, escapedDelimiters));
             var pattern = subPatterns.JoinUsing(AlternationCharacter);
             
-            return new Regex(pattern, RegexOptions.Compiled);
+            return new Regex(pattern);
         }
 
         private static string GetPattern(Delimiter currentDelimiter, string escapedDelimiters)
