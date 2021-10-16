@@ -17,6 +17,11 @@ namespace Dgt.Balance
             Add("[({})]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
             Add("{}([])", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
             Add("{()}[[{}]]", new[] { Delimiter.Braces, Delimiter.Brackets, Delimiter.Parentheses }, true);
+
+            Add("''", new[] { Delimiter.SingleQuotes }, true);
+            Add("\"\"", new[] { Delimiter.DoubleQuotes }, true);
+            Add("\"''\"", new[] { Delimiter.SingleQuotes, Delimiter.DoubleQuotes }, true);
+            Add("\"'\"", new[] { Delimiter.SingleQuotes, Delimiter.DoubleQuotes }, false);
         }
     }
 }
