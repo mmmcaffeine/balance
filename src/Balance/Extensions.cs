@@ -23,5 +23,10 @@ namespace Dgt.Balance
                 var x => Regex.Escape(x.ToString())
             };
         }
+
+        public static string Join(this IEnumerable<string> values, string separator = "")
+        {
+            return string.Join(separator, values);
+        }
     }
 }

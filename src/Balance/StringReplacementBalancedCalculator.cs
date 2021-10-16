@@ -10,24 +10,26 @@ namespace Dgt.Balance
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
-            var regex = CreateRegex(listOfDelimiters);
+            var escapedDelimiters = listOfDelimiters
+                .Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}")
+                .Join();
             var delimiterCharacters = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
+            var regex = CreateRegex(listOfDelimiters, escapedDelimiters);
 
             return IsBalanced(input, delimiterCharacters, regex);
         }
 
-        private static Regex CreateRegex(IReadOnlyCollection<Delimiter> delimiters)
+        private static Regex CreateRegex(IEnumerable<Delimiter> delimiters, string escapedDelimiters)
         {
-            var patterns = delimiters.Select(x => GetPattern(x, delimiters));
+            var patterns = delimiters.Select(delimiter => GetPattern(delimiter, escapedDelimiters));
             
             return new Regex(string.Join("|", patterns), RegexOptions.Compiled);
         }
 
-        private static string GetPattern(Delimiter currentDelimiter, IEnumerable<Delimiter> allDelimiters)
+        private static string GetPattern(Delimiter currentDelimiter, string escapedDelimiters)
         {
             var escapedStart = currentDelimiter.EscapeStart();
-            var unexpectedCharacters = allDelimiters.Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}"); 
-            var characterGroup = $"[^${string.Join(string.Empty, unexpectedCharacters)}]";
+            var characterGroup = $"[^${escapedDelimiters}]";
             var escapedEnd = currentDelimiter.EscapeEnd();
 
             return $"{escapedStart}{characterGroup}*?{escapedEnd}";
