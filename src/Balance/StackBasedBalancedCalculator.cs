@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Dgt.Balance
@@ -10,28 +9,28 @@ namespace Dgt.Balance
         {
             var listOfDelimiters = delimiters.ToList();
             var stack = new Stack<string>();
-
-            for (var i = 0; i < input.Length; i++)
+            var i = 0;
+            
+            while (i < input.Length)
             {
                 var delimiter = FindCurrentDelimiter(input, i, listOfDelimiters);
-                
+
                 if (delimiter is null)
                 {
-                    continue;
+                    i += 1;
                 }
-
-                if (IsStartDelimiter(input, i, delimiter, stack))
+                else if (IsStartDelimiter(input, i, delimiter, stack))
                 {
                     stack.Push(delimiter.Start);
 
-                    i += delimiter.Start.Length - 1;
+                    i += delimiter.Start.Length;
                 }
                 else
                 {
                     if (stack.Empty()) return false;
                     if (stack.Pop() != delimiter.Start) return false;
 
-                    i += delimiter.End.Length - 1;
+                    i += delimiter.End.Length;
                 }
             }
             
