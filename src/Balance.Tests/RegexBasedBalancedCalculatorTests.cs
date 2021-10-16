@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using FluentAssertions;
 using Xunit;
@@ -50,6 +51,25 @@ namespace Dgt.Balance
 
             match.Success.Should().Be(expectedSuccess);
             match.Value.Should().Be(expectedValue);
+        }
+
+        [Fact]
+        public void CreatePattern_Should_BuildPatternNegativeLookaheadUsingAlternation()
+        {
+            // Arrange
+            var currentDelimiter = Delimiter.AspxComment;
+            var allDelimiters = new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment };
+
+            // Act
+            var start = currentDelimiter.EscapeStart();
+            var end = currentDelimiter.EscapeEnd();
+            var allDelimiterStrings = allDelimiters.SelectMany(x => new[] { x.EscapeStart(), x.EscapeEnd() });
+            var alternationOfAllDelimiters = string.Join('|', allDelimiterStrings);
+
+            var pattern = $@"{start}((?!({alternationOfAllDelimiters})).)*?{end}";
+
+            // Assert
+            pattern.Should().Be(@"<%--((?!(<!--|-->|@\*|\*@|<%--|--%>)).)*?--%>");
         }
     }
 }
