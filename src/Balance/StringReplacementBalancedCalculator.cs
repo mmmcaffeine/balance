@@ -18,23 +18,19 @@ namespace Dgt.Balance
 
         private static Regex CreateRegex(IReadOnlyCollection<Delimiter> delimiters)
         {
-            var patterns = delimiters.Select(x => GetPattern(x, delimiters.Except(new[] { x })));
+            var patterns = delimiters.Select(x => GetPattern(x, delimiters));
             
             return new Regex(string.Join("|", patterns), RegexOptions.Compiled);
         }
 
-        private static string GetPattern(Delimiter expectedDelimiter, IEnumerable<Delimiter> unexpectedDelimiters)
+        private static string GetPattern(Delimiter currentDelimiter, IEnumerable<Delimiter> allDelimiters)
         {
-            var unexpectedCharacters = unexpectedDelimiters
-                .Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}")
-                .ToList(); 
-            var escapedStart = expectedDelimiter.EscapeStart();
-            var characterGroup = unexpectedCharacters.Any()
-                ? $"[^${string.Join(string.Empty, unexpectedCharacters)}]*"
-                : ".*";
-            var escapedEnd = expectedDelimiter.EscapeEnd();
+            var escapedStart = currentDelimiter.EscapeStart();
+            var unexpectedCharacters = allDelimiters.Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}"); 
+            var characterGroup = $"[^${string.Join(string.Empty, unexpectedCharacters)}]";
+            var escapedEnd = currentDelimiter.EscapeEnd();
 
-            return $"{escapedStart}{characterGroup}{escapedEnd}";
+            return $"{escapedStart}{characterGroup}*?{escapedEnd}";
         }
 
         private static bool IsBalanced(string input, IEnumerable<char> delimiterCharacters, Regex regex)
