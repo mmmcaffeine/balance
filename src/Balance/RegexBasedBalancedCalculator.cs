@@ -6,12 +6,14 @@ namespace Dgt.Balance
 {
     public class RegexBasedBalancedCalculator : IBalancedCalculator
     {
+        private const string AlternationCharacter = "|";
+        
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
             var unescapedDelimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
             var escapedDelimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.EscapeStart(), x.EscapeEnd() });
-            var regex = CreateRegex(listOfDelimiters, escapedDelimiterStrings.Join("|"));
+            var regex = CreateRegex(listOfDelimiters, escapedDelimiterStrings.JoinUsing(AlternationCharacter));
 
             return IsBalanced(input, unescapedDelimiterStrings, regex);
         }
@@ -19,7 +21,7 @@ namespace Dgt.Balance
         private static Regex CreateRegex(IEnumerable<Delimiter> delimiters, string escapedDelimiters)
         {
             var subPatterns = delimiters.Select(delimiter => GetPattern(delimiter, escapedDelimiters));
-            var pattern = subPatterns.Join("|");
+            var pattern = subPatterns.JoinUsing(AlternationCharacter);
             
             return new Regex(pattern, RegexOptions.Compiled);
         }

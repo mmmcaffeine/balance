@@ -28,7 +28,7 @@ namespace Dgt.Balance
             };
         }
 
-        public static string Join(this IEnumerable<string> values, string separator = "")
+        public static string JoinUsing(this IEnumerable<string> values, string separator = "")
         {
             return string.Join(separator, values);
         }
