@@ -9,32 +9,30 @@ namespace Dgt.Balance
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
-            var escapedDelimiters = listOfDelimiters
-                .Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}")
-                .Join();
-            var delimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
-            var regex = CreateRegex(listOfDelimiters, escapedDelimiters);
+            var unescapedDelimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
+            var escapedDelimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.EscapeStart(), x.EscapeEnd() });
+            var regex = CreateRegex(listOfDelimiters, escapedDelimiterStrings.Join("|"));
 
-            return IsBalanced(input, delimiterStrings, regex);
+            return IsBalanced(input, unescapedDelimiterStrings, regex);
         }
 
         private static Regex CreateRegex(IEnumerable<Delimiter> delimiters, string escapedDelimiters)
         {
-            var patterns = delimiters.Select(delimiter => GetPattern(delimiter, escapedDelimiters));
+            var subPatterns = delimiters.Select(delimiter => GetPattern(delimiter, escapedDelimiters));
+            var pattern = subPatterns.Join("|");
             
-            return new Regex(string.Join("|", patterns), RegexOptions.Compiled);
+            return new Regex(pattern, RegexOptions.Compiled);
         }
 
         private static string GetPattern(Delimiter currentDelimiter, string escapedDelimiters)
         {
             var escapedStart = currentDelimiter.EscapeStart();
-            var characterGroup = $"[^${escapedDelimiters}]";
             var escapedEnd = currentDelimiter.EscapeEnd();
 
-            return $"{escapedStart}{characterGroup}*?{escapedEnd}";
+            return $"{escapedStart}((?!({escapedDelimiters})).)*?{escapedEnd}";
         }
 
-        private static bool IsBalanced(string input, IEnumerable<string> delimiters, Regex regex)
+        private static bool IsBalanced(string input, IEnumerable<string> unescapedDelimiterStrings, Regex regex)
         {
             string previousValue;
             var value = input;
@@ -46,7 +44,7 @@ namespace Dgt.Balance
                 
             } while (value != previousValue);
 
-            return !value.ContainsAny(delimiters);
+            return !value.ContainsAny(unescapedDelimiterStrings);
         }
     }
 }
