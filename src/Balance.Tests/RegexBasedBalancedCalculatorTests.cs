@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Dgt.Balance
 {
-    public class StringReplacementBalancedCalculatorTests
+    public class RegexBasedBalancedCalculatorTests
     {
         [Theory]
         [ClassData(typeof(DelimitersOnlyTestData))]
@@ -14,7 +14,7 @@ namespace Dgt.Balance
             (string input, IEnumerable<Delimiter> delimiters, bool expectedIsBalanced)
         {
             // Arrange
-            var sut = new StringReplacementBalancedCalculator();
+            var sut = new RegexBasedBalancedCalculator();
 
             // Act
             var isBalanced = sut.IsBalanced(input, delimiters);

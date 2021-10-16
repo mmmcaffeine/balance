@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Dgt.Balance
 {
-    public class StringReplacementBalancedCalculator : IBalancedCalculator
+    public class RegexBasedBalancedCalculator : IBalancedCalculator
     {
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
