@@ -10,6 +10,11 @@ namespace Dgt.Balance
         public static Delimiter AngleBrackets { get; } = new('<', '>');
         public static Delimiter SingleQuotes { get; } = new('\'', '\'');
         public static Delimiter DoubleQuotes { get; } = new('"', '"');
+        public static Delimiter HtmlComment { get; } = new("<!--", "-->");
+        public static Delimiter XmlComment { get; } = new("<!--", "-->");
+        public static Delimiter RazorComment { get; } = new("@*", "*@");
+        public static Delimiter AspxComment { get; } = new("<%--", "--%>");
+        public static Delimiter MultiLineComment { get; } = new("/*", "*/");
 
         public Delimiter(char start, char end)
             : this(start.ToString(), end.ToString())
