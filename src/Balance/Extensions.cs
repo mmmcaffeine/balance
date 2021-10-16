@@ -9,6 +9,9 @@ namespace Dgt.Balance
     {
         public static bool Empty<T>(this IEnumerable<T> value) => !value.Any();
 
+        public static bool ExistsAtIndex(this string value, int index, string container) =>
+            container.IndexOf(value, index, StringComparison.Ordinal) == index;
+
         public static bool ContainsAny(this string value, IEnumerable<string> strings) =>
             strings.Any(s => value.Contains(s, StringComparison.InvariantCulture));
 
