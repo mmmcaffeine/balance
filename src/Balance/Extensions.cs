@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -8,9 +9,12 @@ namespace Dgt.Balance
     {
         public static bool Empty<T>(this IEnumerable<T> value) => !value.Any();
 
+        public static bool ContainsAny(this string value, IEnumerable<string> strings) =>
+            strings.Any(s => value.Contains(s, StringComparison.InvariantCulture));
+
         public static bool ContainsAny(this string value, IEnumerable<char> chars) => value.Intersect(chars).Any();
 
-        public static string EscapeStart(this Delimiter delimiter) => Regex.Escape(delimiter.Start.ToString());
+        public static string EscapeStart(this Delimiter delimiter) => Regex.Escape(delimiter.Start);
 
         // Helpfully, Regex.Escape does _not_ escape ']' or '}'
         // See https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.escape?view=net-5.0
@@ -18,9 +22,9 @@ namespace Dgt.Balance
         {
             return delimiter.End switch
             {
-                ']' => @"\]",
-                '}' => @"\}",
-                var x => Regex.Escape(x.ToString())
+                "]" => @"\]",
+                "}" => @"\}",
+                var x => Regex.Escape(x)
             };
         }
 

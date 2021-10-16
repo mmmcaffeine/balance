@@ -12,10 +12,10 @@ namespace Dgt.Balance
             var escapedDelimiters = listOfDelimiters
                 .Select(delimiter => $"{delimiter.EscapeStart()}{delimiter.EscapeEnd()}")
                 .Join();
-            var delimiterCharacters = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
+            var delimiterStrings = listOfDelimiters.SelectMany(x => new[] { x.Start, x.End });
             var regex = CreateRegex(listOfDelimiters, escapedDelimiters);
 
-            return IsBalanced(input, delimiterCharacters, regex);
+            return IsBalanced(input, delimiterStrings, regex);
         }
 
         private static Regex CreateRegex(IEnumerable<Delimiter> delimiters, string escapedDelimiters)
@@ -34,7 +34,7 @@ namespace Dgt.Balance
             return $"{escapedStart}{characterGroup}*?{escapedEnd}";
         }
 
-        private static bool IsBalanced(string input, IEnumerable<char> delimiterCharacters, Regex regex)
+        private static bool IsBalanced(string input, IEnumerable<string> delimiters, Regex regex)
         {
             string previousValue;
             var value = input;
@@ -46,7 +46,7 @@ namespace Dgt.Balance
                 
             } while (value != previousValue);
 
-            return !value.ContainsAny(delimiterCharacters);
+            return !value.ContainsAny(delimiters);
         }
     }
 }

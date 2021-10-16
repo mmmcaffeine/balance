@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Dgt.Balance
@@ -8,11 +9,17 @@ namespace Dgt.Balance
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
             var listOfDelimiters = delimiters.ToList();
+
+            if (listOfDelimiters.Any(x => x.Start.Length > 1 || x.End.Length > 1))
+            {
+                throw new NotSupportedException("Start or end delimiters of more than one character are not yet supported.");
+            }
+            
             var stack = new Stack<char>();
 
             foreach (var character in input)
             {
-                var delimiter = listOfDelimiters.FirstOrDefault(x => character == x.Start || character == x.End);
+                var delimiter = listOfDelimiters.FirstOrDefault(x => character == x.Start[0] || character == x.End[0]);
                 if (delimiter == default) continue;
 
                 if (IsStartCharacter(character, delimiter, stack))
@@ -22,7 +29,7 @@ namespace Dgt.Balance
                 else
                 {
                     if (stack.Empty()) return false;
-                    if (stack.Pop() != delimiter.Start) return false;
+                    if (stack.Pop() != delimiter.Start[0]) return false;
                 }
             }
             
@@ -31,7 +38,7 @@ namespace Dgt.Balance
 
         private static bool IsStartCharacter(char character, Delimiter delimiter, Stack<char> stack)
         {
-            if (character != delimiter.Start)
+            if (character != delimiter.Start[0])
             {
                 return false;
             }
