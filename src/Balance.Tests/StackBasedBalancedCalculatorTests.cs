@@ -9,6 +9,7 @@ namespace Dgt.Balance
         [Theory]
         [ClassData(typeof(DelimitersOnlyTestData))]
         [ClassData(typeof(DelimitedStringsTestData))]
+        [ClassData(typeof(MultiCharacterDelimiterTestData))]
         public void IsBalanced_Should_ReturnTrueWhenDelimitersAreBalanced
             (string input, IEnumerable<Delimiter> delimiters, bool expectedIsBalanced)
         {
