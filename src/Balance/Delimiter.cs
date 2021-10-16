@@ -10,5 +10,8 @@
         public static Delimiter DoubleQuotes { get; } = new('"', '"');
 
         public override string ToString() => $"{Start}{End}";
+        
+        public bool IsMatchingPair => Start == End;
+        public bool IsOpposingPair => !IsMatchingPair;
     }
 }

@@ -31,16 +31,12 @@ namespace Dgt.Balance
 
         private static bool IsStartCharacter(char character, Delimiter delimiter, Stack<char> stack)
         {
-            var (start, end) = delimiter;
-            
-            if (character != start)
+            if (character != delimiter.Start)
             {
                 return false;
             }
 
-            var isOpposingPair = start != end;
-
-            if (isOpposingPair)
+            if (delimiter.IsOpposingPair)
             {
                 return true;
             }
