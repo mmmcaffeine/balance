@@ -15,6 +15,16 @@ namespace Dgt.Balance
             
             Add("*@ Razor Comment", new[] { Delimiter.RazorComment }, false);
             Add("ASPX Comment --%>", new[] { Delimiter.AspxComment }, false);
+
+            Add("@* <!-- Nested --> *@", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, true);
+            Add("<%-- <!-- Nested --> --%>", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, true);
+            Add("@* <!-- <%-- Nested --%> --> *@", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, true);
+            
+            Add("<!-- First --><!-- Second -->", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, true);
+            
+            Add("<!-- Unbalanced @* --> *@", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, false);
+            Add("@* <!-- Unbalanced @* -->", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, false);
+            Add("<!-- <%-- Not Closed -->", new[] { Delimiter.HtmlComment, Delimiter.RazorComment, Delimiter.AspxComment }, false);
         }
     }
 }
