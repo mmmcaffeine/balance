@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Dgt.Balance
 {
-    // TODO Enhance this to cope with the open and close delimiter being the same character e.g. double quotes for a string
     public class StackBasedBalancedCalculator : IBalancedCalculator
     {
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
@@ -16,14 +15,28 @@ namespace Dgt.Balance
                 var delimiter = listOfDelimiters.FirstOrDefault(x => character == x.Start || character == x.End);
                 if (delimiter == default) continue;
 
-                if (character == delimiter.Start)
+                if (delimiter.Start == delimiter.End)
                 {
-                    stack.Push(character);
+                    if (stack.Any() && stack.Peek() == delimiter.Start)
+                    {
+                        stack.Pop();
+                    }
+                    else
+                    {
+                        stack.Push(delimiter.Start);
+                    }
                 }
                 else
                 {
-                    if (stack.Empty()) return false;
-                    if (stack.Pop() != delimiter.Start) return false;
+                    if (character == delimiter.Start)
+                    {
+                        stack.Push(character);
+                    }
+                    else
+                    {
+                        if (stack.Empty()) return false;
+                        if (stack.Pop() != delimiter.Start) return false;
+                    }
                 }
             }
             
