@@ -15,28 +15,20 @@ namespace Dgt.Balance
                 var delimiter = listOfDelimiters.FirstOrDefault(x => character == x.Start || character == x.End);
                 if (delimiter == default) continue;
 
-                if (delimiter.Start == delimiter.End)
+                var startAndEndMatch = delimiter.Start == delimiter.End;
+                var startAlreadyPushed = stack.Any() && stack.Peek() == delimiter.Start;
+                var isStartOfMatchingPair = startAndEndMatch && !startAlreadyPushed;
+                var isStartOfOpposingPair = !startAndEndMatch && character == delimiter.Start;
+                var isStart = isStartOfMatchingPair || isStartOfOpposingPair;
+                
+                if (isStart)
                 {
-                    if (stack.Any() && stack.Peek() == delimiter.Start)
-                    {
-                        stack.Pop();
-                    }
-                    else
-                    {
-                        stack.Push(delimiter.Start);
-                    }
+                    stack.Push(character);
                 }
                 else
                 {
-                    if (character == delimiter.Start)
-                    {
-                        stack.Push(character);
-                    }
-                    else
-                    {
-                        if (stack.Empty()) return false;
-                        if (stack.Pop() != delimiter.Start) return false;
-                    }
+                    if (stack.Empty()) return false;
+                    if (stack.Pop() != delimiter.Start) return false;
                 }
             }
             
