@@ -126,5 +126,46 @@ namespace Dgt.Balance
 
             bool EndOverlaps((int Start, int End) x, (int Start, int End) y) => x.End >= y.Start && x.End <= y.End;
         }
+
+        [Fact]
+        public void IsBalanced_Should_ReturnTrueWhenDelimitersAreBalanced()
+        {
+            // Arrange
+            // Indices taken from the expression "x = Sum((a + b), (c + d));"
+            var balancedPairs = new List<(int Start, int End)> { (7, 24), (8, 14), (17, 23) };
+            
+            // Act, Assert
+            IsBalanced(balancedPairs).Should().BeTrue();
+        }
+        
+        [Fact]
+        public void IsBalanced_Should_ReturnFalseWhenDelimitersAreNotBalanced()
+        {
+            // Arrange
+            // Indices taken from the expression "([)]"
+            var unbalancedPairs = new List<(int Start, int End)> { (0, 2), (1, 3) };
+            
+            // Act, Assert
+            IsBalanced(unbalancedPairs).Should().BeFalse();
+        }
+
+        private static bool IsBalanced(IEnumerable<(int Start, int End)> pairs)
+        {
+            var remainingPairs = pairs.ToList();
+
+            while (remainingPairs.Any())
+            {
+                var pairsToRemove = FindImmediatePairs(remainingPairs).ToList();
+
+                if (!pairsToRemove.Any())
+                {
+                    return false;
+                }
+                
+                remainingPairs = remainingPairs.Except(pairsToRemove).ToList();
+            }
+
+            return true;
+        }
     }
 }
