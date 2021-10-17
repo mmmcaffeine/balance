@@ -62,5 +62,38 @@ namespace Dgt.Balance
 
             return (delimiter, startIndices, endIndices);
         }
+        
+        [Fact]
+        public void PairIndices_Should_PairStartAndEndIndices()
+        {
+            // Arrange
+            // Indices taken from the expression "x = Sum((a + b), (c + d));"
+            var startIndices = new List<int> { 7, 8, 17 };
+            var endIndices = new List<int> { 14, 23, 24 };
+            
+            // Act
+            var pairedIndices = PairIndices(startIndices, endIndices);
+            
+            // Assert
+            pairedIndices.Should().Equal((7, 24), (8, 14), (17, 23));
+        }
+
+        private static IEnumerable<(int Start, int End)> PairIndices(IEnumerable<int> startIndices, IEnumerable<int> endIndices)
+        {
+            var remainingStartIndices = new Queue<int>(startIndices.OrderByDescending(i => i));
+            var remainingEndIndices = endIndices.ToList();
+            var pairedIndices = new List<(int, int)>();
+
+            while (remainingStartIndices.Any())
+            {
+                var startIndex = remainingStartIndices.Dequeue();
+                var endIndex = remainingEndIndices.Find(i => i > startIndex); // We might not find the end index...
+
+                pairedIndices.Add((startIndex, endIndex));
+                remainingEndIndices.Remove(endIndex);
+            }
+            
+            return pairedIndices.OrderBy(t => t.Item1).ToList();
+        }
     }
 }
