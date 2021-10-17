@@ -33,6 +33,12 @@ namespace Dgt.Balance
             var startIndices = input.IndicesOf(delimiter.Start).ToList();
             var endIndices = input.IndicesOf(delimiter.End).ToList();
 
+            if (delimiter.IsMatchingPair)
+            {
+                startIndices = startIndices.Where((_, index) => index % 2 == 0).ToList();
+                endIndices = endIndices.Where((_, index) => index % 2 == 1).ToList();
+            }
+
             return (delimiter, startIndices, endIndices);
         }
         
