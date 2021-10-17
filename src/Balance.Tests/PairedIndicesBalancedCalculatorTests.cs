@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using FluentAssertions;
+using FluentAssertions.Common;
 using FluentAssertions.Execution;
 using Xunit;
 
@@ -116,8 +118,13 @@ namespace Dgt.Balance
 
         private static IEnumerable<(int Start, int End)> FindImmediatePairs(IReadOnlyCollection<(int Start, int End)> pairs)
         {
-            return pairs.Where(pair => !pairs.Except(new[] { pair }).Any(x =>
-                (x.Start >= pair.Start && x.Start <= pair.End) || (x.End >= pair.Start && x.End <= pair.End)));
+            return pairs.Where(firstPair => pairs.Except(firstPair).None(secondPair => Overlaps(secondPair, firstPair)));
+
+            bool Overlaps((int Start, int End) x, (int Start, int End) y) => StartOverlaps(x, y) || EndOverlaps(x, y);
+
+            bool StartOverlaps((int Start, int End) x, (int Start, int End) y) => x.Start >= y.Start && x.Start <= y.End;
+
+            bool EndOverlaps((int Start, int End) x, (int Start, int End) y) => x.End >= y.Start && x.End <= y.End;
         }
     }
 }

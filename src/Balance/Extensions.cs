@@ -9,6 +9,12 @@ namespace Dgt.Balance
     {
         public static bool Empty<T>(this IEnumerable<T> value) => !value.Any();
 
+        public static IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> values, TSource valueToExclude) =>
+            values.Except(new[] { valueToExclude });
+
+        public static bool None<TSource>(this IEnumerable<TSource> values, Func<TSource, bool> predicate) =>
+            !values.Any(predicate);
+
         public static bool ExistsAtIndex(this string value, int index, string container) =>
             container.IndexOf(value, index, StringComparison.Ordinal) == index;
 
