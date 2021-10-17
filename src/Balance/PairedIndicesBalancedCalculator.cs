@@ -5,7 +5,14 @@ namespace Dgt.Balance
 {
     public class PairedIndicesBalancedCalculator : IBalancedCalculator
     {
-        private record IndexPair(int StartIndex, int EndIndex);
+        private record IndexPair(int StartIndex, int EndIndex)
+        {
+            public bool Overlaps(IndexPair indexPair) => StartOverlaps(indexPair) || EndOverlaps(indexPair);
+            
+            private bool StartOverlaps(IndexPair indexPair) => StartIndex >= indexPair.StartIndex && StartIndex <= indexPair.EndIndex;
+            
+            private bool EndOverlaps(IndexPair indexPair) => EndIndex >= indexPair.StartIndex && EndIndex <= indexPair.EndIndex;
+        }
         
         // TODO Can we improve performance by short-circuiting some of these loops i.e. there is no point finding all the
         //      indices for the second delimiter if we know the counts for the first are different
@@ -86,13 +93,7 @@ namespace Dgt.Balance
         
         private static IEnumerable<IndexPair> FindImmediateIndexPairs(IReadOnlyCollection<IndexPair> indexPairs)
         {
-            return indexPairs.Where(first => indexPairs.Except(first).None(second => Overlaps(second, first)));
-
-            bool Overlaps(IndexPair x, IndexPair y) => StartOverlaps(x, y) || EndOverlaps(x, y);
-
-            bool StartOverlaps(IndexPair x, IndexPair y) => x.StartIndex >= y.StartIndex && x.StartIndex <= y.EndIndex;
-
-            bool EndOverlaps(IndexPair x, IndexPair y) => x.EndIndex >= y.StartIndex && x.EndIndex <= y.EndIndex;
+            return indexPairs.Where(first => indexPairs.Except(first).None(second => second.Overlaps(first)));
         }
     }
 }
