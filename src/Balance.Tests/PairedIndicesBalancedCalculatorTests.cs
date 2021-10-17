@@ -95,5 +95,29 @@ namespace Dgt.Balance
             
             return pairedIndices.OrderBy(t => t.Item1).ToList();
         }
+
+        [Fact]
+        public void FindImmediatePairs_Should_ReturnPairsThatDoNotEncompassStartOrEndOfOtherPairs()
+        {
+            // Arrange
+            // Indices taken from the expression "x = Sum((a + b), (c + d));"
+            // We should find the parens that are the sub-expressions of "(a + b)" and "(c + d)" because they do _not_
+            // contain any other opening or closing parens within them. We should _not_ find the parens for "Sum(...)"
+            // because they _do_ contain other opening and closing parens
+            var pairs = new List<(int Start, int End)> { (7, 24), (8, 14), (17, 23) };
+            
+            // Act
+            var immediatePairs = FindImmediatePairs(pairs);
+
+            // Assert
+            // We don't care about the ordering of these
+            immediatePairs.Should().BeEquivalentTo(new[] { (8, 14), (17, 23) });
+        }
+
+        private static IEnumerable<(int Start, int End)> FindImmediatePairs(IReadOnlyCollection<(int Start, int End)> pairs)
+        {
+            return pairs.Where(pair => !pairs.Except(new[] { pair }).Any(x =>
+                (x.Start >= pair.Start && x.Start <= pair.End) || (x.End >= pair.Start && x.End <= pair.End)));
+        }
     }
 }
