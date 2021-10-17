@@ -16,7 +16,7 @@ namespace Dgt.Balance
         
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
-            var unpairedIndices = new List<(Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices)>();
+            var unpairedIndices = new List<(List<int> StartIndices, List<int> EndIndices)>();
 
             foreach (var delimiter in delimiters)
             {
@@ -29,8 +29,7 @@ namespace Dgt.Balance
 
             var pairedIndices = new List<IndexPair>();
 
-            // TODO We don't need the delimiter here, so lets get rid of it!
-            foreach (var (_, startIndices, endIndices) in unpairedIndices)
+            foreach (var (startIndices, endIndices) in unpairedIndices)
             {
                 var (success, item) = PairIndices(startIndices, endIndices);
 
@@ -42,7 +41,7 @@ namespace Dgt.Balance
             return IndexPairsAreBalanced(pairedIndices);
         }
         
-        private static (Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices) IndicesOf(string input, Delimiter delimiter)
+        private static (List<int> StartIndices, List<int> EndIndices) IndicesOf(string input, Delimiter delimiter)
         {
             var startIndices = input.IndicesOf(delimiter.Start).ToList();
             var endIndices = input.IndicesOf(delimiter.End).ToList();
@@ -53,7 +52,7 @@ namespace Dgt.Balance
                 endIndices = endIndices.Where((_, index) => index % 2 == 1).ToList();
             }
 
-            return (delimiter, startIndices, endIndices);
+            return (startIndices, endIndices);
         }
         
         private static (bool Success, List<IndexPair> IndexPairs) PairIndices(IEnumerable<int> startIndices, IEnumerable<int> endIndices)
