@@ -14,25 +14,32 @@ namespace Dgt.Balance
             private bool EndOverlaps(IndexPair indexPair) => EndIndex >= indexPair.StartIndex && EndIndex <= indexPair.EndIndex;
         }
         
-        // TODO Can we improve performance by short-circuiting some of these loops i.e. there is no point finding all the
-        //      indices for the second delimiter if we know the counts for the first are different
         public bool IsBalanced(string input, IEnumerable<Delimiter> delimiters)
         {
-            var unpairedIndices = delimiters.Select(delimiter => IndicesOf(input, delimiter)).ToList();
+            var unpairedIndices = new List<(Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices)>();
 
-            if (unpairedIndices.Any(x => x.StartIndices.Count != x.EndIndices.Count))
+            foreach (var delimiter in delimiters)
             {
-                return false;
+                var item = IndicesOf(input, delimiter);
+
+                if (item.StartIndices.Count != item.EndIndices.Count) return false;
+                
+                unpairedIndices.Add(item);
             }
 
-            var pairedIndices = unpairedIndices.Select(x => PairIndices(x.StartIndices, x.EndIndices)).ToList();
+            var pairedIndices = new List<List<IndexPair>>();
 
-            if (pairedIndices.Any(x => !x.Success))
+            // TODO We don't need the delimiter here, so lets get rid of it!
+            foreach (var (_, startIndices, endIndices) in unpairedIndices)
             {
-                return false;
+                var (success, item) = PairIndices(startIndices, endIndices);
+
+                if (!success) return false;
+                
+                pairedIndices.Add(item);
             }
-            
-            return IndexPairsAreBalanced(pairedIndices.SelectMany(x => x.IndexPairs));
+
+            return IndexPairsAreBalanced(pairedIndices.SelectMany(x => x));
         }
         
         private static (Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices) IndicesOf(string input, Delimiter delimiter)
