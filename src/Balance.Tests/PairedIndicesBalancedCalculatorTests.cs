@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Xunit;
 
 namespace Dgt.Balance
@@ -36,6 +38,29 @@ namespace Dgt.Balance
             }
 
             return indices;
+        }
+        
+        [Fact]
+        public void IndicesOf_Should_ReturnIndicesOfStartAndEnd()
+        {
+            // Arrange, Act
+            var (delimiter,  startIndices, endIndices) = IndicesOf("x = Sum((a + b), (c + d));", Delimiter.Parentheses);
+
+            // Assert
+            using (new AssertionScope())
+            {
+                delimiter.Should().Be(Delimiter.Parentheses);
+                startIndices.Should().Equal(7, 8, 17);
+                endIndices.Should().Equal(14, 23, 24);
+            }
+        }
+
+        private static (Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices) IndicesOf(string value, Delimiter delimiter)
+        {
+            var startIndices = IndicesOf(value, delimiter.Start).ToList();
+            var endIndices = IndicesOf(value, delimiter.End).ToList();
+
+            return (delimiter, startIndices, endIndices);
         }
     }
 }
