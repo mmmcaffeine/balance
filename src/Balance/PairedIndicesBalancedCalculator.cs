@@ -27,7 +27,7 @@ namespace Dgt.Balance
                 unpairedIndices.Add(item);
             }
 
-            var pairedIndices = new List<List<IndexPair>>();
+            var pairedIndices = new List<IndexPair>();
 
             // TODO We don't need the delimiter here, so lets get rid of it!
             foreach (var (_, startIndices, endIndices) in unpairedIndices)
@@ -36,10 +36,10 @@ namespace Dgt.Balance
 
                 if (!success) return false;
                 
-                pairedIndices.Add(item);
+                pairedIndices.AddRange(item);
             }
 
-            return IndexPairsAreBalanced(pairedIndices.SelectMany(x => x));
+            return IndexPairsAreBalanced(pairedIndices);
         }
         
         private static (Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices) IndicesOf(string input, Delimiter delimiter)
