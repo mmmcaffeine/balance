@@ -10,6 +10,22 @@ namespace Dgt.Balance
     public class PairedIndicesBalancedCalculatorTests
     {
         [Theory]
+        [ClassData(typeof(DelimitersOnlyTestData))]
+        public void IsBalanced_Should_ReturnTrueWhenDelimitersAreBalanced
+            (string input, IEnumerable<Delimiter> delimiters, bool expectedIsBalanced)
+        {
+            // Arrange
+            var sut = new PairedIndicesBalancedCalculator();
+
+            // Act
+            var isBalanced = sut.IsBalanced(input, delimiters);
+        
+            // Assert
+            isBalanced.Should().Be(expectedIsBalanced);
+        }
+        
+        // TODO If we wish to keep these tests we should move them into ExtensionsTests
+        [Theory]
         [MemberData(nameof(GetIndicesOfTestData))]
         public void IndicesOf_Should_ReturnIndicesOfSubstring(string value, string substring, IEnumerable<int> expectedIndices)
         {
@@ -113,7 +129,7 @@ namespace Dgt.Balance
         }
 
         [Fact]
-        public void IsBalanced_Should_ReturnTrueWhenDelimitersAreBalanced()
+        public void IsBalanced_Should_ReturnTrueWhenPairsAreBalanced()
         {
             // Arrange
             // Indices taken from the expression "x = Sum((a + b), (c + d));"
@@ -124,7 +140,7 @@ namespace Dgt.Balance
         }
         
         [Fact]
-        public void IsBalanced_Should_ReturnFalseWhenDelimitersAreNotBalanced()
+        public void IsBalanced_Should_ReturnFalseWhenPairsAreNotBalanced()
         {
             // Arrange
             // Indices taken from the expression "([)]"
