@@ -93,7 +93,7 @@ namespace Dgt.Balance
         
         private static IEnumerable<IndexPair> FindImmediateIndexPairs(IReadOnlyCollection<IndexPair> indexPairs)
         {
-            return indexPairs.Where(first => indexPairs.Except(first).None(second => second.Overlaps(first)));
+            return indexPairs.Where(first => indexPairs.None(second => first != second && second.Overlaps(first)));
         }
     }
 }
