@@ -22,6 +22,19 @@ namespace Dgt.Balance
             strings.Any(s => value.Contains(s, StringComparison.InvariantCulture));
 
         public static bool ContainsAny(this string value, IEnumerable<char> chars) => value.Intersect(chars).Any();
+        
+        public static IEnumerable<int> IndicesOf(this string value, string substring)
+        {
+            var indices = new List<int>();
+            var index = 0;
+
+            while ((index = value.IndexOf(substring, index, StringComparison.Ordinal)) != -1)
+            {
+                indices.Add(index++);
+            }
+
+            return indices;
+        }
 
         public static string EscapeStart(this Delimiter delimiter) => Regex.Escape(delimiter.Start);
 

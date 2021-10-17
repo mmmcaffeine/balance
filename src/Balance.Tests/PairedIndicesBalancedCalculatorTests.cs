@@ -13,7 +13,7 @@ namespace Dgt.Balance
         [MemberData(nameof(GetIndicesOfTestData))]
         public void IndicesOf_Should_ReturnIndicesOfSubstring(string value, string substring, IEnumerable<int> expectedIndices)
         {
-            IndicesOf(value, substring).Should().Equal(expectedIndices);
+            value.IndicesOf(substring).Should().Equal(expectedIndices);
         }
         
         private static TheoryData<string, string, IEnumerable<int>> GetIndicesOfTestData()
@@ -25,19 +25,6 @@ namespace Dgt.Balance
                 { "ABC (()) DEF ()", "(", new[] { 4, 5, 13 } },
                 { "ABC (()) ABC (())", "ABC", new[] { 0, 9 } }
             };
-        }
-
-        private static IEnumerable<int> IndicesOf(string value, string substring)
-        {
-            var indices = new List<int>();
-            var index = 0;
-
-            while ((index = value.IndexOf(substring, index, StringComparison.Ordinal)) != -1)
-            {
-                indices.Add(index++);
-            }
-
-            return indices;
         }
         
         [Fact]
@@ -57,8 +44,8 @@ namespace Dgt.Balance
 
         private static (Delimiter Delimiter, List<int> StartIndices, List<int> EndIndices) IndicesOf(string value, Delimiter delimiter)
         {
-            var startIndices = IndicesOf(value, delimiter.Start).ToList();
-            var endIndices = IndicesOf(value, delimiter.End).ToList();
+            var startIndices = value.IndicesOf(delimiter.Start).ToList();
+            var endIndices = value.IndicesOf(delimiter.End).ToList();
 
             return (delimiter, startIndices, endIndices);
         }
