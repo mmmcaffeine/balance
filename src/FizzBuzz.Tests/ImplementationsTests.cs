@@ -11,5 +11,19 @@ namespace Dgt.Dojo.FizzBuzz
         {
             Implementations.ClassicFizzBuzz(value).Should().Be(expected);
         }
+
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void TuplesAndSwitchExpressions(int value, string expected)
+        {
+            Implementations.TuplesAndSwitchExpressions(value).Should().Be(expected);
+        }
+
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void SwitchExpressionsAndPatternMatching(int value, string expected)
+        {
+            Implementations.SwitchExpressionsAndPatternMatching(value).Should().Be(expected);
+        }
     }
 }
