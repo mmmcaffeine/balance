@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public record Delimiter
     {

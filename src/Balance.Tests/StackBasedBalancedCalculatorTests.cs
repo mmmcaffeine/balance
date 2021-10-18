@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public class StackBasedBalancedCalculatorTests
     {

@@ -2,10 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>Dgt.Balance.Tests</AssemblyName>
-        <RootNamespace>Dgt.Balance</RootNamespace>
+        <AssemblyName>Dgt.Dojo.Balance.Tests</AssemblyName>
+        <RootNamespace>Dgt.Dojo.Balance</RootNamespace>
         <LangVersion>9</LangVersion>
         <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

@@ -5,7 +5,7 @@ using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public class RegexBasedBalancedCalculatorTests
     {

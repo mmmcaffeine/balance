@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public class DelimitersOnlyTestData : TheoryData<string, IEnumerable<Delimiter>, bool>
     {

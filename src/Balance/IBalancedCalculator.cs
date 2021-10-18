@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public interface IBalancedCalculator
     {

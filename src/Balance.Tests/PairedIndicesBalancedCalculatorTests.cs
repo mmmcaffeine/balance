@@ -5,7 +5,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public class PairedIndicesBalancedCalculatorTests
     {

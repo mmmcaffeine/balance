@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public class PairedIndicesBalancedCalculator : IBalancedCalculator
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Dgt.Balance
+namespace Dgt.Dojo.Balance
 {
     public class RegexBasedBalancedCalculator : IBalancedCalculator
     {

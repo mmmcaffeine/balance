@@ -1,8 +1,10 @@
-# Challenge
+# Balance
+
+## Challenge
 
 Write a program to determine if the parentheses `()`, the brackets `[]`, and the braces `{}`, in a string are balanced.
 
-# Examples
+## Examples
 
 * `{{)(}}` is not balanced because `)` comes before `(`
 * `({)}` is not balanced because `)` is not balanced between `{}` (and the `{` is not balanced between `()`)
@@ -10,7 +12,7 @@ Write a program to determine if the parentheses `()`, the brackets `[]`, and the
 * `{}([])` is balanced
 * `{()}[[{}]]` is balanced
 
-# Mark's "Extra Credit"
+## Mark's "Extra Credit"
 
 The initial challenge and examples were as I found them on [Cyber Dojo](https://cyber-dojo.org/creator/choose_problem?). As they were a bit too easy I decided to knock it up a notch and see if I could deal with the following scenarios:
 
@@ -19,7 +21,7 @@ The initial challenge and examples were as I found them on [Cyber Dojo](https://
 * Handle the starting and ending values being the same e.g. `"my string"`
 * Handle the starting and ending values consisting of multiple characters e.g. `<!--` and `-->`
 
-# To Do
+## To Do
 
 There is currently no parameter validation, and some combinations wouldn't make much sense to use. We should validate for:
 
