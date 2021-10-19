@@ -18,5 +18,12 @@ namespace Dgt.Dojo.FizzBuzz
         {
             ArrayLookupFizzBuzz.GetFizzBuzzFromValueArrays(value).Should().Be(expected);
         }
+        
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void GetFizzBuzzFromValueHashsets(int value, string expected)
+        {
+            ArrayLookupFizzBuzz.GetFizzBuzzFromValueArrays(value).Should().Be(expected);
+        }
     }
 }
