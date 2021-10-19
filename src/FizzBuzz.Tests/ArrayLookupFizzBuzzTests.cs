@@ -7,9 +7,16 @@ namespace Dgt.Dojo.FizzBuzz
     {
         [Theory]
         [ClassData(typeof(ClassicTestData))]
-        public void GetFizzBuzz(int value, string expected)
+        public void GetFizzBuzzFromAnswerFuncs(int value, string expected)
         {
-            ArrayLookupFizzBuzz.GetFizzBuzz(value).Should().Be(expected);
+            ArrayLookupFizzBuzz.GetFizzBuzzFromAnswerFuncs(value).Should().Be(expected);
+        }
+        
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void GetFizzBuzzFromValueArrays(int value, string expected)
+        {
+            ArrayLookupFizzBuzz.GetFizzBuzzFromValueArrays(value).Should().Be(expected);
         }
     }
 }
