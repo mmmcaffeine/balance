@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>Dgt.Dojo.Optimisations</AssemblyName>
+        <RootNamespace>Dgt.Dojo.Optimisations</RootNamespace>
+        <LangVersion>9</LangVersion>
+        <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
+        <RepositoryUrl>https://github.com/mmmcaffeine/dojo</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DebugSymbols>false</DebugSymbols>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+</Project>
