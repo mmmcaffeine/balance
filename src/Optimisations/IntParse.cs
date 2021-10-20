@@ -81,5 +81,29 @@ namespace Dgt.Dojo.Optimisations
     
             return x;
         }
+        
+        public static int F_MultiplyAndAddWithForLoop(string value)
+        {
+            var x = 0;
+            
+            for (var i = 0; i < value.Length; i++)
+            {
+                x = x * 10 + value[i] - 48;
+            }
+            
+            return x;
+        }
+        
+        public static int G_MultiplyAndAddWithForEachLoop(string value)
+        {
+            var x = 0;
+            
+            foreach (var c in value)
+            {
+                x = x * 10 + c - 48;
+            }
+            
+            return x;
+        }
     }
 }

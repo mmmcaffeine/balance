@@ -53,5 +53,19 @@ namespace Dgt.Dojo.Optimisations
         {
             IntParse.E_InputSpan(value).Should().Be(expected);
         }
+        
+        [Theory]
+        [MemberData(nameof(IntParseTestData))]
+        public void F_MultiplyAndAddWithForLoop_Should_ParseIntFromReadOnlySpanOfChar(string value, int expected)
+        {
+            IntParse.F_MultiplyAndAddWithForLoop(value).Should().Be(expected);
+        }
+        
+        [Theory]
+        [MemberData(nameof(IntParseTestData))]
+        public void G_MultiplyAndAddWithForEachLoop_Should_ParseIntFromReadOnlySpanOfChar(string value, int expected)
+        {
+            IntParse.G_MultiplyAndAddWithForEachLoop(value).Should().Be(expected);
+        }
     }
 }

@@ -42,5 +42,17 @@ namespace Dgt.Dojo.Optimisations
         {
             return IntParse.E_InputSpan(Input);
         }
+        
+        [Benchmark]
+        public int F_MultiplyAndAddWithForLoop()
+        {
+            return IntParse.F_MultiplyAndAddWithForLoop(Input);
+        }
+        
+        [Benchmark]
+        public int G_MultiplyAndAddWithForEachLoop()
+        {
+            return IntParse.G_MultiplyAndAddWithForEachLoop(Input);
+        }
     }
 }
