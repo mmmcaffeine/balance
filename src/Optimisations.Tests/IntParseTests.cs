@@ -35,7 +35,7 @@ namespace Dgt.Dojo.Optimisations
         
         [Theory]
         [MemberData(nameof(IntParseTestData))]
-        public void C_EnumerateBackwardsForPowersOfTen(string value, int expected)
+        public void C_EnumerateBackwardsForPowersOfTen_Should_ParseIntFromString(string value, int expected)
         {
             IntParse.C_EnumerateBackwardsForPowersOfTen(value).Should().Be(expected);
         }
