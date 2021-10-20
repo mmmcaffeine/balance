@@ -30,5 +30,17 @@ namespace Dgt.Dojo.Optimisations
         {
             return IntParse.C_EnumerateBackwardsForPowersOfTen(Input);
         }
+        
+        [Benchmark]
+        public int D_NoSpan()
+        {
+            return IntParse.D_NoSpan(Input);
+        }
+        
+        [Benchmark]
+        public int E_InputSpan()
+        {
+            return IntParse.E_InputSpan(Input);
+        }
     }
 }

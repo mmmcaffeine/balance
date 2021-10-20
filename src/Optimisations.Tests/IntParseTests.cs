@@ -39,5 +39,19 @@ namespace Dgt.Dojo.Optimisations
         {
             IntParse.C_EnumerateBackwardsForPowersOfTen(value).Should().Be(expected);
         }
+        
+        [Theory]
+        [MemberData(nameof(IntParseTestData))]
+        public void D_NoSpan_Should_ParseIntFromReadOnlySpanOfChar(string value, int expected)
+        {
+            IntParse.D_NoSpan(value).Should().Be(expected);
+        }
+        
+        [Theory]
+        [MemberData(nameof(IntParseTestData))]
+        public void E_InputSpan_Should_ParseIntFromReadOnlySpanOfChar(string value, int expected)
+        {
+            IntParse.E_InputSpan(value).Should().Be(expected);
+        }
     }
 }

@@ -49,5 +49,37 @@ namespace Dgt.Dojo.Optimisations
     
             return x;
         }
+        
+        // As C_EnumerateBackwardsForPowersOfTen, but treating the string as a char[] rather than converting it
+        // to a ReadOnlySpan<char>. This ends up being about 10% faster than C 😃
+        public static int D_NoSpan(string value)
+        {
+            var multiplier = 1;
+            var x = 0;
+    
+            for (var i = value.Length - 1; i >= 0; i--)
+            {
+                x += (value[i] - 48) * multiplier;
+                multiplier *= 10;
+            }
+    
+            return x;
+        }
+
+        // As C_EnumerateBackwardsForPowersOfTen, but having the ReadOnlySpan<char> passed to us, rather than
+        // creating it for ourselves. Surprisingly, this is significantly (≈33%) slower than C 😕
+        public static int E_InputSpan(ReadOnlySpan<char> value)
+        {
+            var multiplier = 1;
+            var x = 0;
+    
+            for (var i = value.Length - 1; i >= 0; i--)
+            {
+                x += (value[i] - 48) * multiplier;
+                multiplier *= 10;
+            }
+    
+            return x;
+        }
     }
 }
