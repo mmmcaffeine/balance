@@ -17,5 +17,15 @@ namespace Dgt.Dojo.Optimisations
 
             return indices;
         }
+        
+        public static IEnumerable<int> A_YieldReturn(string value, string substring)
+        {
+            var index = 0;
+
+            while ((index = value.IndexOf(substring, index, StringComparison.Ordinal)) != -1)
+            {
+                yield return index++;
+            }
+        }
     }
 }

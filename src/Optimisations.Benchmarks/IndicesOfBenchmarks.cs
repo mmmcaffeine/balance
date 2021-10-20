@@ -13,5 +13,8 @@ namespace Dgt.Dojo.Optimisations
         
         [Benchmark(Baseline = true)]
         public void Baseline() => IndicesOf.Baseline(Value, Substring).Consume(Consumer);
+
+        [Benchmark]
+        public void A_YieldReturn() => IndicesOf.A_YieldReturn(Value, Substring).Consume(Consumer);
     }
 }

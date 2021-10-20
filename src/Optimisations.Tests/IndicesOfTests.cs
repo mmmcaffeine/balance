@@ -21,5 +21,12 @@ namespace Dgt.Dojo.Optimisations
         {
             IndicesOf.Baseline(value, substring).Should().BeEquivalentTo(expected);
         }
+        
+        [Theory]
+        [MemberData(nameof(IndicesOfTestData))]
+        public void A_YieldReturn_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
+        {
+            IndicesOf.A_YieldReturn(value, substring).Should().BeEquivalentTo(expected);
+        }
     }
 }
