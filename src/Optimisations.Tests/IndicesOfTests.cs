@@ -12,7 +12,8 @@ namespace Dgt.Dojo.Optimisations
             { "(())()", "(", new[] { 0, 1, 4 } },
             { "(())()", ")", new[] { 2, 3, 5 } },
             { "()()", "[", Array.Empty<int>() },
-            { "", "[", Array.Empty<int>() }
+            { "", "[", Array.Empty<int>() },
+            { "var x = Sum(new[] {1, 3, 5, 7});", ", ", new[] { 20, 23, 26 } }
         };
 
         [Theory]
@@ -41,6 +42,13 @@ namespace Dgt.Dojo.Optimisations
         public void C_UsingSpanAndStack_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
         {
             IndicesOf.C_UsingSpanAndStack(value, substring).Should().BeEquivalentTo(expected);
+        }
+        
+        [Theory]
+        [MemberData(nameof(IndicesOfTestData))]
+        public void D_ManualComparisonOfSpans_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
+        {
+            IndicesOf.D_ManualComparisonOfSpans(value, substring).Should().BeEquivalentTo(expected);
         }
     }
 }

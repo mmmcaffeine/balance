@@ -22,5 +22,8 @@ namespace Dgt.Dojo.Optimisations
         
         [Benchmark]
         public void C_UsingSpanAndStack() => IndicesOf.C_UsingSpanAndStack(Value, Substring).Consume(Consumer);
+        
+        [Benchmark]
+        public void D_ManualComparisonOfSpans() => IndicesOf.D_ManualComparisonOfSpans(Value, Substring).Consume(Consumer);
     }
 }

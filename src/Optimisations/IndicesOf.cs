@@ -75,5 +75,41 @@ namespace Dgt.Dojo.Optimisations
 
             return indices;
         }
+        
+        public static IEnumerable<int> D_ManualComparisonOfSpans(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        {
+            var indices = new List<int>();
+            var index = 0;
+            
+            while (index + substring.Length <= value.Length)
+            {
+                if (Compare(value[index..(index + substring.Length)], substring))
+                {
+                    indices.Add(index);
+                }
+
+                index++;
+            }
+
+            return indices;
+
+            bool Compare(ReadOnlySpan<char> left, ReadOnlySpan<char> right)
+            {
+                if (left.Length != right.Length)
+                {
+                    return false;
+                }
+                
+                for (var i = 0; i < left.Length; i++)
+                {
+                    if (left[i] != right[i])
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
     }
 }
