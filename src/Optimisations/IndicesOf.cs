@@ -112,7 +112,7 @@ namespace Dgt.Dojo.Optimisations
             }
         }
         
-        public static IEnumerable<int> E_ManualComparisonOfSpansUsingOffset(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        public static IEnumerable<int> E_ManualComparisonOfSpansUsingOffsetAndLocalFunction(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
         {
             var indices = new List<int>();
             var index = 0;
@@ -141,6 +141,29 @@ namespace Dgt.Dojo.Optimisations
 
                 return true;
             }
+        }
+        
+        public static IEnumerable<int> F_ManualComparisonOfSpansUsingOffsetAndNestedLoop(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        {
+            var indices = new List<int>();
+            var index = 0;
+            
+            while (index + substring.Length <= value.Length)
+            {
+                for (var j = 0; j < substring.Length; j++)
+                {
+                    if(value[index + j] != substring[j])
+                    {
+                        break;
+                    }
+                    
+                    indices.Add(index);
+                }
+
+                index++;
+            }
+
+            return indices;
         }
     }
 }

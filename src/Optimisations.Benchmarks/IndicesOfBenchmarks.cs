@@ -25,8 +25,13 @@ namespace Dgt.Dojo.Optimisations
         
         [Benchmark]
         public void D_ManualComparisonOfSpansUsingRange() => IndicesOf.D_ManualComparisonOfSpansUsingRange(Value, Substring).Consume(Consumer);
+
+        [Benchmark]
+        public void E_ManualComparisonOfSpansUsingOffsetAndLocalFunction() =>
+            IndicesOf.E_ManualComparisonOfSpansUsingOffsetAndLocalFunction(Value, Substring).Consume(Consumer);
         
         [Benchmark]
-        public void E_ManualComparisonOfSpansUsingOffset() => IndicesOf.E_ManualComparisonOfSpansUsingOffset(Value, Substring).Consume(Consumer);
+        public void F_ManualComparisonOfSpansUsingOffsetAndNestedLoop() =>
+            IndicesOf.F_ManualComparisonOfSpansUsingOffsetAndNestedLoop(Value, Substring).Consume(Consumer);
     }
 }
