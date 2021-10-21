@@ -10,56 +10,68 @@ namespace Dgt.Dojo.FizzBuzz
     public class FizzBuzzBenchmarks
     {
         [Benchmark(Baseline = true)]
-        public void ClassicFizzBuzz()
+        public void A_Baseline()
         {
+            var implementation = new A_Baseline();
+            
             for (var i = 1; i <= 100; i++)
             {
-                _ = Implementations.ClassicFizzBuzz(i);
+                _ = implementation.FizzBuzz(i);
             }
         }
 
         [Benchmark]
-        public void TuplesAndSwitchExpressions()
+        public void B_TuplesAndSwitchExpressions()
         {
+            var implementation = new B_TuplesAndSwitchExpressions();
+            
             for (var i = 1; i <= 100; i++)
             {
-                _ = Implementations.TuplesAndSwitchExpressions(i);
+                _ = implementation.FizzBuzz(i);
             }
         }
         
         [Benchmark]
-        public void SwitchExpressionsAndPatternMatching()
+        public void C_SwitchExpressionsAndPatternMatching()
         {
+            var implementation = new C_SwitchExpressionsAndPatternMatching();
+            
             for (var i = 1; i <= 100; i++)
             {
-                _ = Implementations.SwitchExpressionsAndPatternMatching(i);
+                _ = implementation.FizzBuzz(i);
             }
         }
         
         [Benchmark]
-        public void GetFizzBuzzFromAnswerFuncs()
+        public void D_LookUpAnswerFunction()
         {
+            var implementation = new D_LookUpAnswerFunction();
+            
             for (var i = 1; i <= 100; i++)
             {
-                _ = ArrayLookupFizzBuzz.GetFizzBuzzFromAnswerFuncs(i);
+                _ = implementation.FizzBuzz(i);
             }
         }
         
         [Benchmark]
-        public void GetFizzBuzzFromValueArrays()
+        public void E_StoreFizzersAndBuzzersInArray()
         {
+            var implementation = new E_StoreFizzersAndBuzzersInArray();
+            
             for (var i = 1; i <= 100; i++)
             {
-                _ = ArrayLookupFizzBuzz.GetFizzBuzzFromValueArrays(i);
+                _ = implementation.FizzBuzz(i);
             }
         }
         
         [Benchmark]
-        public void GetFizzBuzzFromValueHashsets()
+        public void F_StoreFizzersAndBuzzersInHashset()
         {
+            var implementation = new F_StoreFizzersAndBuzzersInHashset();
+            
             for (var i = 1; i <= 100; i++)
             {
-                _ = ArrayLookupFizzBuzz.GetFizzBuzzFromValueHashsets(i);
+                _ = implementation.FizzBuzz(i);
             }
         }
     }

@@ -13,37 +13,6 @@ namespace Dgt.Dojo.FizzBuzz
         private static readonly HashSet<int> FizzesAsHashset = new(new[] { 3, 6, 9, 12, 15 });
         private static readonly HashSet<int> BuzzesAsHashset = new(new[] { 5, 10, 15 });
 
-        private static readonly Func<int, string>[] AnswerFuncs =
-        {
-            i => i.ToString(),
-            i => i.ToString(),
-            _ => "Fizz",
-            i => i.ToString(),
-            _ => "Buzz",
-            _ => "Fizz",
-            i => i.ToString(),
-            i => i.ToString(),
-            _ => "Fizz",
-            _ => "Buzz",
-            i => i.ToString(),
-            _ => "Fizz",
-            i => i.ToString(),
-            i => i.ToString(),
-            _ => "FizzBuzz"
-        };
-
-        public static string GetFizzBuzzFromAnswerFuncs(int value)
-        {
-            var index = value - 1;
-            
-            while (index >= 15)
-            {
-                index -= 15;
-            }
-
-            return AnswerFuncs[index](value);
-        }
-
         public static string GetFizzBuzzFromValueArrays(int value)
         {
             var index = value;
