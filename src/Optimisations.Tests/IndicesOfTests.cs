@@ -28,5 +28,19 @@ namespace Dgt.Dojo.Optimisations
         {
             IndicesOf.A_YieldReturn(value, substring).Should().BeEquivalentTo(expected);
         }
+        
+        [Theory]
+        [MemberData(nameof(IndicesOfTestData))]
+        public void B_UsingSpanAndList_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
+        {
+            IndicesOf.B_UsingSpanAndList(value, substring).Should().BeEquivalentTo(expected);
+        }
+        
+        [Theory]
+        [MemberData(nameof(IndicesOfTestData))]
+        public void C_UsingSpanAndStack_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
+        {
+            IndicesOf.C_UsingSpanAndStack(value, substring).Should().BeEquivalentTo(expected);
+        }
     }
 }

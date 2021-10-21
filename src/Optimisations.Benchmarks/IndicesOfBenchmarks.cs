@@ -16,5 +16,11 @@ namespace Dgt.Dojo.Optimisations
 
         [Benchmark]
         public void A_YieldReturn() => IndicesOf.A_YieldReturn(Value, Substring).Consume(Consumer);
+
+        [Benchmark]
+        public void B_UsingSpanAndList() => IndicesOf.B_UsingSpanAndList(Value, Substring).Consume(Consumer);
+        
+        [Benchmark]
+        public void C_UsingSpanAndStack() => IndicesOf.C_UsingSpanAndStack(Value, Substring).Consume(Consumer);
     }
 }

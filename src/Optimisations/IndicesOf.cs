@@ -27,5 +27,53 @@ namespace Dgt.Dojo.Optimisations
                 yield return index++;
             }
         }
+        
+        public static IEnumerable<int> B_UsingSpanAndList(ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        {
+            var indices = new List<int>();
+            var index = 0;
+            var lastIndex = -1;
+            var remainingValue = value[..];
+
+            while (index < value.Length)
+            {
+                index = remainingValue.IndexOf(substring, StringComparison.Ordinal);
+
+                if (index == -1)
+                {
+                    break;
+                }
+                
+                lastIndex = lastIndex + index + 1;
+                indices.Add(lastIndex) ;
+                remainingValue = remainingValue[(index + 1)..];
+            }
+
+            return indices;
+        }
+        
+        public static IEnumerable<int> C_UsingSpanAndStack(ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        {
+            var indices = new Stack<int>();
+            var index = 0;
+            var lastIndex = -1;
+            var remainingValue = value[..];
+
+            while (index < value.Length)
+            {
+                index = remainingValue.IndexOf(substring, StringComparison.Ordinal);
+
+                if (index == -1)
+                {
+                    break;
+                }
+
+                lastIndex = lastIndex + index + 1;
+                indices.Push(lastIndex) ;
+                remainingValue = remainingValue[(index + 1)..];
+            }
+
+            return indices;
+        }
     }
 }
