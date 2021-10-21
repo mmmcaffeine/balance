@@ -76,7 +76,7 @@ namespace Dgt.Dojo.Optimisations
             return indices;
         }
         
-        public static IEnumerable<int> D_ManualComparisonOfSpans(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        public static IEnumerable<int> D_ManualComparisonOfSpansUsingRange(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
         {
             var indices = new List<int>();
             var index = 0;
@@ -103,6 +103,37 @@ namespace Dgt.Dojo.Optimisations
                 for (var i = 0; i < left.Length; i++)
                 {
                     if (left[i] != right[i])
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+        
+        public static IEnumerable<int> E_ManualComparisonOfSpansUsingOffset(this ReadOnlySpan<char> value, ReadOnlySpan<char> substring)
+        {
+            var indices = new List<int>();
+            var index = 0;
+            
+            while (index + substring.Length <= value.Length)
+            {
+                if (Compare(value, substring, index))
+                {
+                    indices.Add(index);
+                }
+
+                index++;
+            }
+
+            return indices;
+
+            bool Compare(ReadOnlySpan<char> left, ReadOnlySpan<char> right, int offset)
+            {
+                for (var i = 0; i < right.Length; i++)
+                {
+                    if (left[i + offset] != right[i])
                     {
                         return false;
                     }

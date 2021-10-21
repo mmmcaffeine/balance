@@ -46,9 +46,16 @@ namespace Dgt.Dojo.Optimisations
         
         [Theory]
         [MemberData(nameof(IndicesOfTestData))]
-        public void D_ManualComparisonOfSpans_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
+        public void D_ManualComparisonOfSpansUsingRange_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
         {
-            IndicesOf.D_ManualComparisonOfSpans(value, substring).Should().BeEquivalentTo(expected);
+            IndicesOf.D_ManualComparisonOfSpansUsingRange(value, substring).Should().BeEquivalentTo(expected);
+        }
+        
+        [Theory]
+        [MemberData(nameof(IndicesOfTestData))]
+        public void E_ManualComparisonOfSpansUsingOffset_Should_ReturnAllIndicesOfSubstring(string value, string substring, IEnumerable<int> expected)
+        {
+            IndicesOf.E_ManualComparisonOfSpansUsingOffset(value, substring).Should().BeEquivalentTo(expected);
         }
     }
 }
