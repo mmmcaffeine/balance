@@ -48,5 +48,12 @@ namespace Dgt.Dojo.FizzBuzz
         {
             new F_StoreFizzersAndBuzzersInHashset().FizzBuzz(value).Should().Be(expected);
         }
+
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void G_IndexIntoPreCalculatedCharArray(int value, string expected)
+        {
+            new G_IndexIntoPreCalculatedCharArray().FizzBuzz(value).Should().Be(expected);
+        }
     }
 }

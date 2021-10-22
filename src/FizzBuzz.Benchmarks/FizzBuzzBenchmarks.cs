@@ -74,6 +74,17 @@ namespace Dgt.Dojo.FizzBuzz
                 _ = implementation.FizzBuzz(i);
             }
         }
+        
+        [Benchmark]
+        public void G_IndexIntoPreCalculatedCharArray()
+        {
+            var implementation = new G_IndexIntoPreCalculatedCharArray();
+            
+            for (var i = 1; i <= 100; i++)
+            {
+                _ = implementation.FizzBuzz(i);
+            }
+        }
     }
 }
 
