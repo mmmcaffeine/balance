@@ -62,5 +62,19 @@ namespace Dgt.Dojo.FizzBuzz
         {
             new H_IndexIntoPreCalculatedString().FizzBuzz(value).Should().Be(expected);
         }
+        
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void I_KeyIntoDictionaryOfString(int value, string expected)
+        {
+            new I_KeyIntoDictionaryOfString().FizzBuzz(value).Should().Be(expected);
+        }
+        
+        [Theory]
+        [ClassData(typeof(ClassicTestData))]
+        public void J_KeyIntoDictionaryOfStringWithNulls(int value, string expected)
+        {
+            new J_KeyIntoDictionaryOfStringWithNulls().FizzBuzz(value).Should().Be(expected);
+        }
     }
 }

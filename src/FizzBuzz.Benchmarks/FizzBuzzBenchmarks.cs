@@ -96,6 +96,28 @@ namespace Dgt.Dojo.FizzBuzz
                 _ = implementation.FizzBuzz(i);
             }
         }
+        
+        [Benchmark]
+        public void I_KeyIntoDictionaryOfString()
+        {
+            var implementation = new I_KeyIntoDictionaryOfString();
+            
+            for (var i = 1; i <= 100; i++)
+            {
+                _ = implementation.FizzBuzz(i);
+            }
+        }
+        
+        [Benchmark]
+        public void J_KeyIntoDictionaryOfStringWithNulls()
+        {
+            var implementation = new J_KeyIntoDictionaryOfStringWithNulls();
+            
+            for (var i = 1; i <= 100; i++)
+            {
+                _ = implementation.FizzBuzz(i);
+            }
+        }
     }
 }
 
