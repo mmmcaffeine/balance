@@ -40,3 +40,7 @@ It _might_ be possible to make scenarios 2 and 3 work. For example, in scenario 
 * How little memory do you need to consume?
 * Can you make the game configurable, but still perform quickly?
     * Allow the user pass in any number of pairs of divisor and string values e.g. `var fizzBuzz = GetFizzBuzz(37, (3, "Fizz), (5, "Buzz"));` or similar
+
+# Optimisations
+
+This project is not a programming challenge per se; it is a location to practice with micro-optimisations and thus learn more about low-level memory management in C#, which APIs are slow, which are fast, and so forth.
