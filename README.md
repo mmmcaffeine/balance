@@ -41,6 +41,26 @@ It _might_ be possible to make scenarios 2 and 3 work. For example, in scenario 
 * Can you make the game configurable, but still perform quickly?
     * Allow the user pass in any number of pairs of divisor and string values e.g. `var fizzBuzz = GetFizzBuzz(37, (3, "Fizz), (5, "Buzz"));` or similar
 
+# Add Digits
+
+## Challenge
+
+Given a non-negative integer, repeatedly add all its digits until the result has only one digit.
+
+## Examples
+
+* An input of `38` gives an output of `2`
+    * `3 + 8 = 11`
+    * `1 + 1 = 2`
+* An input of `1337` gives an output `5`
+    * `1 + 3 + 3 + 7 = 14`
+    * `1 + 4 = 5`
+
+## Links
+
+* There is a [JSFiddle](https://jsfiddle.net/ryanaiimi/dv1y6gf9/5/)
+* There is a [.NET Fiddle](https://dotnetfiddle.net/DSdjYX)
+
 # Optimisations
 
 This project is not a programming challenge per se; it is a location to practice with micro-optimisations and thus learn more about low-level memory management in C#, which APIs are slow, which are fast, and so forth.

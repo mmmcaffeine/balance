@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optimisations.Tests", "Opti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optimisations.Benchmarks", "Optimisations.Benchmarks\Optimisations.Benchmarks.csproj", "{5FDFE3A7-A2E2-4DDA-8471-484ED577C252}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddDigits", "AddDigits\AddDigits.csproj", "{095D05BD-4A10-4CB4-B810-81C1BEB69E42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddDigits.Tests", "AddDigits.Tests\AddDigits.Tests.csproj", "{B45B3634-E4FE-4701-B7E1-833C023A60DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{5FDFE3A7-A2E2-4DDA-8471-484ED577C252}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FDFE3A7-A2E2-4DDA-8471-484ED577C252}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FDFE3A7-A2E2-4DDA-8471-484ED577C252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{095D05BD-4A10-4CB4-B810-81C1BEB69E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{095D05BD-4A10-4CB4-B810-81C1BEB69E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{095D05BD-4A10-4CB4-B810-81C1BEB69E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{095D05BD-4A10-4CB4-B810-81C1BEB69E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
