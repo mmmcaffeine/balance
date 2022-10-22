@@ -24,4 +24,9 @@ public class DigitsAdderTests
     [MemberData(nameof(AddDigitsTestData))]
     public void AddDigitsUsingOperatorsAndRecursion_Should_RecursivelyAddDigits(uint value, byte expected) =>
         DigitsAdder.AddDigitsUsingOperatorsAndRecursion(value).Should().Be(expected);
+
+    [Theory]
+    [MemberData(nameof(AddDigitsTestData))]
+    public void AddDigitsUsingDivRemAndRecursion_Should_RecursivelyAddDigits(uint value, byte expected) =>
+        DigitsAdder.AddDigitsUsingDivRemAndRecursion(value).Should().Be(expected);
 }

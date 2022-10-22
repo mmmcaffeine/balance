@@ -25,4 +25,9 @@ public class AddDigitsBenchmarks
     [ArgumentsSource(nameof(ValuesForValue))]
     public byte DigitsAdder_AddDigitsUsingOperatorsAndRecursion(uint value) =>
         DigitsAdder.AddDigitsUsingOperatorsAndRecursion(value);
+
+    [Benchmark(Description = "Math.DivRem with recursion")]
+    [ArgumentsSource(nameof(ValuesForValue))]
+    public byte DigitsAdder_AddDigitsUsingDivRemAndRecursion(uint value) =>
+        DigitsAdder.AddDigitsUsingDivRemAndRecursion(value);
 }
