@@ -16,8 +16,13 @@ public class AddDigitsBenchmarks
         }
     }
 
-    [Benchmark(Baseline = true)]
+    [Benchmark(Baseline = true, Description = "String iteration with recursion")]
     [ArgumentsSource(nameof(ValuesForValue))]
     public byte DigitsAdder_AddDigitsUsingStringIterationAndRecursion(uint value) =>
         DigitsAdder.AddDigitsUsingStringIterationAndRecursion(value);
+
+    [Benchmark(Description = "Modulo and division operators with recursion")]
+    [ArgumentsSource(nameof(ValuesForValue))]
+    public byte DigitsAdder_AddDigitsUsingOperatorsAndRecursion(uint value) =>
+        DigitsAdder.AddDigitsUsingOperatorsAndRecursion(value);
 }

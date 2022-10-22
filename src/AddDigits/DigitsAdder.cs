@@ -14,4 +14,22 @@ public static class DigitsAdder
         // we will need at most three iterations, so extra stack frames is probably not a concern to us
         return sum >= 10 ? AddDigitsUsingStringIterationAndRecursion((uint)sum) : (byte)sum;
     }
+
+    public static byte AddDigitsUsingOperatorsAndRecursion(uint value)
+    {
+        var digits = new List<uint>();
+        var remaining = value;
+
+        while (remaining > 9)
+        {
+            digits.Add(remaining % 10);
+            remaining /= 10;
+        }
+
+        digits.Add(remaining);
+
+        var sum = digits.Sum(x => x);
+
+        return sum >= 10 ? AddDigitsUsingOperatorsAndRecursion((uint)sum) : (byte)sum;
+    }
 }
