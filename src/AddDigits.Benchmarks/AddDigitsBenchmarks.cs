@@ -25,6 +25,11 @@ public class AddDigitsBenchmarks
     [ArgumentsSource(nameof(ValuesForValue))]
     public byte DigitsAdder_AddDigitsUsingOperatorsAndRecursion(uint value) =>
         DigitsAdder.AddDigitsUsingOperatorsAndRecursion(value);
+    
+    [Benchmark(Description = "Modulo and division operators with running total and recursion")]
+    [ArgumentsSource(nameof(ValuesForValue))]
+    public byte DigitsAdder_AddDigitsUsingOperatorsWithRunningTotalAndRecursion(uint value) =>
+        DigitsAdder.AddDigitsUsingOperatorsWithRunningTotalAndRecursion(value);
 
     [Benchmark(Description = "Math.DivRem with recursion")]
     [ArgumentsSource(nameof(ValuesForValue))]

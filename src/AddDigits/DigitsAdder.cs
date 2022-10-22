@@ -33,6 +33,24 @@ public static class DigitsAdder
         return sum >= 10 ? AddDigitsUsingOperatorsAndRecursion((uint)sum) : (byte)sum;
     }
 
+    public static byte AddDigitsUsingOperatorsWithRunningTotalAndRecursion(uint value)
+    {
+        var runningTotal = 0u;
+        var remaining = value;
+
+        while (remaining > 9)
+        {
+            runningTotal += remaining % 10;
+            remaining /= 10;
+        }
+
+        runningTotal += remaining;
+        
+        return runningTotal >= 10
+            ? AddDigitsUsingOperatorsWithRunningTotalAndRecursion(runningTotal)
+            : (byte)runningTotal;
+    }
+
     public static byte AddDigitsUsingDivRemAndRecursion(uint value)
     {
         var digits = new List<uint>();
