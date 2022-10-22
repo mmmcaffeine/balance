@@ -12,6 +12,6 @@ public class DigitsAdderTests
     [InlineData(3999999999, 3)]
     [InlineData(4199999999, 5)]
     [InlineData(uint.MaxValue, 3)]
-    public void AddDigits_Should_RecursivelyAddDigits(uint value, byte expected) =>
-        DigitsAdder.AddDigits(value).Should().Be(expected);
+    public void AddDigitsUsingStringIterationAndRecursion_Should_RecursivelyAddDigits(uint value, byte expected) =>
+        DigitsAdder.AddDigitsUsingStringIterationAndRecursion(value).Should().Be(expected);
 }

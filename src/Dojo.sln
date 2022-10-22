@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddDigits", "AddDigits\AddD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddDigits.Tests", "AddDigits.Tests\AddDigits.Tests.csproj", "{B45B3634-E4FE-4701-B7E1-833C023A60DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddDigits.Benchmarks", "AddDigits.Benchmarks\AddDigits.Benchmarks.csproj", "{5A190ED5-EF80-4DED-8428-1E5AEEF20A5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B45B3634-E4FE-4701-B7E1-833C023A60DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A190ED5-EF80-4DED-8428-1E5AEEF20A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A190ED5-EF80-4DED-8428-1E5AEEF20A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A190ED5-EF80-4DED-8428-1E5AEEF20A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A190ED5-EF80-4DED-8428-1E5AEEF20A5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
