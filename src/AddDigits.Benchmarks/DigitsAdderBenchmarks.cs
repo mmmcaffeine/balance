@@ -4,42 +4,21 @@ using BenchmarkDotNet.Attributes;
 namespace Dgt.Dojo.AddDigits;
 
 [MemoryDiagnoser]
-[SuppressMessage("Performance", "CA1822:Mark members as static")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "BenchmarkDotNet requires parameter sources to be public.")]
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global", Justification = "BenchmarkDotNet requires parameter sources to have setters.")]
 public class DigitsAdderBenchmarks
 {
-    public static IEnumerable<uint> ValuesForValue
-    {
-        get
-        {
-            yield return 38;
-            yield return 1337;
-            yield return 987654321;
-            yield return uint.MaxValue;
-        }
-    }
+    [ParamsSource(nameof(ValuesForDigitsAdder))]
+    public IDigitsAdder? DigitsAdder { get; set; }
 
-    [Benchmark(Baseline = true, Description = "0 String iteration with recursion")]
-    [ArgumentsSource(nameof(ValuesForValue))]
-    public byte DigitsAdder_AddDigitsUsingStringIterationAndRecursion(uint value) =>
-        DigitsAdder.AddDigitsUsingStringIterationAndRecursion(value);
+    public static IEnumerable<IDigitsAdder> ValuesForDigitsAdder => typeof(IDigitsAdder).Assembly.GetTypes()
+        .Where(x => x.IsAssignableTo(typeof(IDigitsAdder)) && !x.IsAbstract)
+        .Select(Activator.CreateInstance)
+        .Cast<IDigitsAdder>();
 
-    [Benchmark(Description = "1 Modulo and division operators with recursion")]
-    [ArgumentsSource(nameof(ValuesForValue))]
-    public byte DigitsAdder_AddDigitsUsingOperatorsAndRecursion(uint value) =>
-        DigitsAdder.AddDigitsUsingOperatorsAndRecursion(value);
+    [Params(38, 1337, 987654321, uint.MaxValue)]
+    public uint Value { get; set; }
 
-    [Benchmark(Description = "2 Math.DivRem with recursion")]
-    [ArgumentsSource(nameof(ValuesForValue))]
-    public byte DigitsAdder_AddDigitsUsingDivRemAndRecursion(uint value) =>
-        DigitsAdder.AddDigitsUsingDivRemAndRecursion(value);
-
-    [Benchmark(Description = "3 Modulo and division operators with running total and recursion")]
-    [ArgumentsSource(nameof(ValuesForValue))]
-    public byte DigitsAdder_AddDigitsUsingOperatorsWithRunningTotalAndRecursion(uint value) =>
-        DigitsAdder.AddDigitsUsingOperatorsWithRunningTotalAndRecursion(value);
-
-    [Benchmark(Description = "4 Modulo and division operators with running total and nested loop")]
-    [ArgumentsSource(nameof(ValuesForValue))]
-    public byte DigitsAdder_AddDigitsUsingOperatorsWithRunningTotalAndNestedLoop(uint value) =>
-        DigitsAdder.AddDigitsUsingOperatorsWithRunningTotalAndNestedLoop(value);
+    [Benchmark]
+    public byte Benchmark() => DigitsAdder!.AddDigits(Value);
 }
