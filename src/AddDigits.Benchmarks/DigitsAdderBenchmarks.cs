@@ -3,7 +3,7 @@
 namespace Dgt.Dojo.AddDigits;
 
 [MemoryDiagnoser]
-public class AddDigitsBenchmarks
+public class DigitsAdderBenchmarks
 {
     public static IEnumerable<uint> ValuesForValue
     {

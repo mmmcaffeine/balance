@@ -1,4 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
 using Dgt.Dojo.AddDigits;
 
-_ = BenchmarkRunner.Run<AddDigitsBenchmarks>();
+_ = BenchmarkRunner.Run<DigitsAdderBenchmarks>();
