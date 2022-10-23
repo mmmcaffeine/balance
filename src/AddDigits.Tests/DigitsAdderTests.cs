@@ -29,6 +29,11 @@ public class DigitsAdderTests
     [MemberData(nameof(AddDigitsTestData))]
     public void AddDigitsUsingOperatorsWithRunningTotalAndRecursion_Should_RecursivelyAddDigits(uint value, byte expected) =>
         DigitsAdder.AddDigitsUsingOperatorsWithRunningTotalAndRecursion(value).Should().Be(expected);
+    
+    [Theory]
+    [MemberData(nameof(AddDigitsTestData))]
+    public void AddDigitsUsingOperatorsWithRunningTotalAndNestedLoop_Should_RecursivelyAddDigits(uint value, byte expected) =>
+        DigitsAdder.AddDigitsUsingOperatorsWithRunningTotalAndNestedLoop(value).Should().Be(expected);
 
     [Theory]
     [MemberData(nameof(AddDigitsTestData))]
