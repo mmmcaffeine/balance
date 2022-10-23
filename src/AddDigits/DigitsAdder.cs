@@ -1,4 +1,6 @@
-﻿namespace Dgt.Dojo.AddDigits;
+﻿// ReSharper disable TailRecursiveCall
+
+namespace Dgt.Dojo.AddDigits;
 
 public static class DigitsAdder
 {
