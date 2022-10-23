@@ -2,18 +2,19 @@ namespace Dgt.Dojo.AddDigits;
 
 public class DigitsAdderTests
 {
-    public static TheoryData<uint, byte> AddDigitsTestData = new()
-    {
-        { 0, 0 },
-        {38, 2},
-        {1337, 5},
-        {987654321, 9},
-        {1999999999, 1},
-        {int.MaxValue, 1},
-        {3999999999, 3},
-        {4199999999, 5},
-        {uint.MaxValue, 3}
-    };
+    public static TheoryData<uint, byte> AddDigitsTestData =>
+        new()
+        {
+            { 0, 0 },
+            { 38, 2 },
+            { 1337, 5 },
+            { 987654321, 9 },
+            { 1999999999, 1 },
+            { int.MaxValue, 1 },
+            { 3999999999, 3 },
+            { 4199999999, 5 },
+            { uint.MaxValue, 3 }
+        };
 
     [Theory]
     [MemberData(nameof(AddDigitsTestData))]
