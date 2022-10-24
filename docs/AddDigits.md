@@ -3,6 +3,8 @@
 ## Performance Observations
 
 * Treating the input as numeric and performing math operations against it was almost always faster than treating the input as a `string` and iterating the individual characters
+* Capturing digits using a regular expression rather than converting to a `string` and then a `char[]` is orders of magnitude slower
+  * This also allocates significantly more memory on the heap
 * Maintaining a running total of individual digits rather than maintaining a `List<T>` and then summing it was orders of magnitude faster
   * This also had the advantage of eliminating any heap allocations and therefore garbage collection
 * Using `Math.DivRem` was marginally faster than using a combination of the modulo and division operators
