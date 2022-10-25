@@ -3,11 +3,19 @@ const { addDigits } = require('./add-digits');
 describe('addDigits', () => {
     const expectedErrorMessage = 'Must be a non-negative integer';
 
-    it('should recursively add digits for a non-negative integer', () => {
-        // 83 -> 8 + 3 = 11
-        // 11 -> 1 + 1 = 2
-        const actual = addDigits(83);
-        expect(actual).toBe(2);
+    // Test data taken from my C# tests, and does not yet account for JavaScript handling numbers differently
+    it.each([
+        [0, 0],
+        [38, 2],
+        [1337, 5],
+        [1999999999, 1],
+        [2147483647, 1],
+        [3999999999, 3],
+        [4199999999, 5],
+        [4294967295, 3]
+    ])('recursively adds digits of %p expecting %p', (value, expected) => {
+        const actual = addDigits(value);
+        expect(actual).toBe(expected);
     });
 
     it('should recursively add digits for something that can be parsed to a non-negative integer', () => {
